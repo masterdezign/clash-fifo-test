@@ -28,12 +28,6 @@ entity Proj is
 end;
 
 architecture structural of Proj is
-  signal sclk1389        : std_logic;
-  signal sclk1389_rstn   : std_logic;
-  signal sclk2500        : std_logic;
-  signal sclk2500_rstn   : std_logic;
-  signal system1000      : std_logic;
-  signal system1000_rstn : std_logic;
   signal input_0         : product0;
   signal output_0        : product1;
 begin
