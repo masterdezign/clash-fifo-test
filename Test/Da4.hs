@@ -12,13 +12,13 @@ import Da4
 -- putStrLn $ show $ (L.take 101 a :: [(Bit, Bit)])
 
 -- The second high bit means we are running in debug mode
-testInput :: Signal' SClk36 (BitVector 12, Bit)
-testInput = stimuliGenerator' sclk2 $(v (L.replicate 108 (0::BitVector 12, 1 :: Bit)) )
+testInput :: Signal' DA36 (BitVector 12, Bit)
+testInput = stimuliGenerator' da36 $(v (L.replicate 108 (0::BitVector 12, 1 :: Bit)) )
 
-runTest = sampleN 108 $ expectedOutput $ bundle' sclk2 $ da4 $ unbundle' sclk2 testInput
+runTest = sampleN 108 $ expectedOutput $ bundle' da36 $ da4 $ unbundle' da36 testInput
 
-expectedOutput :: Signal' SClk36 (Bit, Bit) -> Signal' SClk36 Bool
-expectedOutput = outputVerifier' sclk2 $(v [(0 :: Bit, 0 :: Bit)  -- packet 0
+expectedOutput :: Signal' DA36 (Bit, Bit) -> Signal' DA36 Bool
+expectedOutput = outputVerifier' da36 $(v [(0 :: Bit, 0 :: Bit)  -- packet 0
                                      , (0, 0)
                                      , (0, 0)
                                      , (0, 0)

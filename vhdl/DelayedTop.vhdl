@@ -31,30 +31,30 @@ end DelayedTop;
 architecture Wrapper of DelayedTop is
 
 component Proj is
-  port(ja_data         : in std_logic_vector(1 downto 0);
-       sw              : in std_logic_vector(1 downto 0);
-       debug_flag      : in std_logic_vector(0 downto 0);
+  port(ja_data       : in std_logic_vector(1 downto 0);
+       sw            : in std_logic_vector(1 downto 0);
+       debug_flag    : in std_logic_vector(0 downto 0);
        -- clock
-       SCLK1389        : in std_logic;
+       AD180         : in std_logic;
        -- asynchronous reset: active low
-       SCLK1389_rstn   : in std_logic;
+       AD180_rstn    : in std_logic;
        -- clock
-       SCLK2500        : in std_logic;
+       DA100         : in std_logic;
        -- asynchronous reset: active low
-       SCLK2500_rstn   : in std_logic;
+       DA100_rstn    : in std_logic;
        -- clock
-       system1000      : in std_logic;
+       system72      : in std_logic;
        -- asynchronous reset: active low
-       system1000_rstn : in std_logic;
-       ja_cs           : out std_logic_vector(0 downto 0);
-       jc_cs           : out std_logic_vector(0 downto 0);
-       jc_data         : out std_logic_vector(0 downto 0));
+       system72_rstn : in std_logic;
+       ja_cs         : out std_logic_vector(0 downto 0);
+       jc_cs         : out std_logic_vector(0 downto 0);
+       jc_data       : out std_logic_vector(0 downto 0));
 end component;
 
 signal feedback_clk : std_logic;
-signal sclk20 : std_logic;
-signal sclk36 : std_logic;
-signal system1000 : std_logic;
+signal AD180 : std_logic;
+signal DA100 : std_logic;
+signal system72 : std_logic;
 
 begin
     PROJ1 : Proj
@@ -63,19 +63,19 @@ begin
         ja_data => ja_data,
         sw => sw,
         debug_flag => debug_flag,
-        sclk1389 => sclk36,
-        sclk1389_rstn => not reset,
-        sclk2500 => sclk20,
-        sclk2500_rstn => not reset,
-        system1000 => system1000,
-        system1000_rstn => not reset,
+        AD180 => AD180,
+        AD180_rstn => not reset,
+        DA100 => DA100,
+        DA100_rstn => not reset,
+        system72 => system72,
+        system72_rstn => not reset,
         ja_cs => ja_cs,
         jc_cs => jc_cs,
         jc_data => jc_data
     );
 
-    ja_sclk <= sclk20;
-    jc_sclk <= sclk36;
+    ja_sclk <= AD180;
+    jc_sclk <= DA100;
 
     -- PLLE2_BASE: Base Phase Locked Loop (PLL)
     --             Artix-7
@@ -114,9 +114,9 @@ begin
     )
     port map (
         -- Clock Outputs: 1-bit (each) output: User configurable clock outputs
-        CLKOUT0 => system1000,   -- 1-bit output: CLKOUT0
-        CLKOUT1 => sclk36,   -- 1-bit output: CLKOUT1
-        CLKOUT2 => sclk20,   -- 1-bit output: CLKOUT2
+        CLKOUT0 => system72,   -- 1-bit output: CLKOUT0
+        CLKOUT1 => DA100,   -- 1-bit output: CLKOUT1
+        CLKOUT2 => AD180,   -- 1-bit output: CLKOUT2
         CLKOUT3 => OPEN,   -- 1-bit output: CLKOUT3
         CLKOUT4 => OPEN,   -- 1-bit output: CLKOUT4
         CLKOUT5 => OPEN,   -- 1-bit output: CLKOUT5

@@ -31,8 +31,8 @@ da4T (i, cmd1, cs, burst_signal) (data1, debug_flag) =
     max_i = fromInteger (natVal cs) - 1
 
 -- | Controller of digital to analog converter.
-da4 :: (Signal' SClk36 (BitVector 12), Signal' SClk36 Bit) -> (Signal' SClk36 Bit, Signal' SClk36 Bit)
-da4 = mealyB' sclk2 da4T (0, poweronCommand, cs_waveform, 0)
+da4 :: (Signal' DA36 (BitVector 12), Signal' DA36 Bit) -> (Signal' DA36 Bit, Signal' DA36 Bit)
+da4 = mealyB' da36 da4T (0, poweronCommand, cs_waveform, 0)
   where
     cs_waveform = $$(bLit ((L.replicate 32 '0') L.++ (L.replicate 4 '1'))) :: BitVector 36
     poweronCommand = $$(bLit "00001000000000000000000000000001") :: BitVector 32

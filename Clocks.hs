@@ -3,15 +3,15 @@ module Clocks
 
 import CLaSH.Prelude.Explicit
 
--- System clock Clk @50 MHz
---
+type System50 = Clk "system" 72
+type AD20 = Clk "AD" 180
+type DA36 = Clk "DA" 100
 
--- AD1 clock @20 MHz
-type SClk20  = Clk "sclk" 2500
-sclk :: SClock SClk20
-sclk = sclock
+system50 :: SClock System50
+system50 = sclock
 
--- DA4 clock @36 MHz
-type SClk36  = Clk "sclk" 1389
-sclk2 :: SClock SClk36
-sclk2 = sclock
+ad20 :: SClock AD20
+ad20 = sclock
+
+da36 :: SClock DA36
+da36 = sclock

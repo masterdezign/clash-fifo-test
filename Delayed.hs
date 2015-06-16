@@ -20,8 +20,17 @@ dPulseT cnt _ = (cnt', b)
     cnt' | cnt == 49 = 0
          | otherwise = cnt + 1
 
-dPulse :: Signal () -> Signal Bit
-dPulse = dPulseT <^> 0
+dPulse :: Signal' System50 () -> Signal' System50 Bit
+dPulse = mealyB' system50 dPulseT 0
+
+burstSignal :: Signal' System50 Bit -> Signal' System50 (BitVector 12)
+burstSignal = mealyB' system50 burstSignalT 0
+
+burstSignalT :: BitVector 12 -> Bit -> (BitVector 12, BitVector 12)
+burstSignalT cnt d_pulse = (cnt', cnt)
+  where
+    cnt' | d_pulse == high = cnt + 1
+         | otherwise = cnt
 
 {-# ANN topEntity
   (defTop
@@ -29,13 +38,13 @@ dPulse = dPulseT <^> 0
     , t_inputs   = ["ja_data", "sw", "debug_flag"]
     , t_outputs  = ["ja_cs", "jc_cs", "jc_data"]
     }) #-}
-topEntity :: (Signal' SClk20 (BitVector 2), Signal (BitVector 2), Signal' SClk36 Bit) -> (Signal' SClk20 Bit, Signal' SClk36 Bit, Signal' SClk36 Bit)
+topEntity :: (Signal' AD20 (BitVector 2), Signal' System50 (BitVector 2), Signal' DA36 Bit) -> (Signal' AD20 Bit, Signal' DA36 Bit, Signal' DA36 Bit)
 topEntity (ja_data, sw, debug_flag) = (ja_cs, jc_cs, jc_data)
   where
     (b_word', a_word', ja_cs) = ad1 ja_data
-    a_word = unsafeSynchronizer sclk systemClock a_word'
-    b_word = unsafeSynchronizer sclk systemClock b_word'
+    a_word = unsafeSynchronizer ad20 system50 a_word'
+    b_word = unsafeSynchronizer ad20 system50 b_word'
     d_pulse = dPulse (signal ())
     delayed' = (fifo d306) (a_word, d_pulse)
-    delayed = unsafeSynchronizer systemClock sclk2 delayed'
+    delayed = unsafeSynchronizer system50 da36 delayed'
     (jc_data, jc_cs) = da4 (delayed, debug_flag)

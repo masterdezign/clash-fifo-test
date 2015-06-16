@@ -35,6 +35,6 @@ ad1T (sreg1, sreg2, i, data1, data2, cs) serial_data1_2 = ((sreg1', sreg2', i', 
     skip_bits = 4
     width = 12
 
-ad1 :: Signal' SClk20 (BitVector 2) -> (Signal' SClk20 (OutWord), Signal' SClk20 (OutWord), Signal' SClk20 Bit)
-ad1 = mealyB' sclk ad1T (0, 0, 0, 0, 0, cs_waveform)
+ad1 :: Signal' AD20 (BitVector 2) -> (Signal' AD20 (OutWord), Signal' AD20 (OutWord), Signal' AD20 Bit)
+ad1 = mealyB' ad20 ad1T (0, 0, 0, 0, 0, cs_waveform)
   where cs_waveform = $$(bLit "00000000000000001111") :: BitVector 20

@@ -7,8 +7,11 @@ import CLaSH.Prelude.Explicit
 import Clocks
 import Ad1
 
-testInput :: Signal' SClk20 (BitVector 2)
-testInput = stimuliGenerator' sclk $(v [
+-- let a = simulateB da4 $ L.replicate 101 (0,1)
+-- putStrLn $ show $ (L.take 101 a :: [(Bit, Bit)])
+
+testInput :: Signal' AD20 (BitVector 2)
+testInput = stimuliGenerator' ad20 $(v [
                               -- packet 0
                               0::(BitVector 2), 0, 0, 0  -- Void pack
                               , 1, 1, 1, 1
@@ -29,10 +32,10 @@ testInput = stimuliGenerator' sclk $(v [
                               , 0, 0, 0, 0  -- Void pack
                               ] )
 
-runTest = sampleN 60 $ expectedOutput $ bundle' sclk $ ad1 testInput
+runTest = sampleN 60 $ expectedOutput $ bundle' ad20 $ ad1 testInput
 
-expectedOutput :: Signal' SClk20 (OutWord, OutWord, Bit) -> Signal' SClk20 Bool
-expectedOutput = outputVerifier' sclk $(v [ (0::OutWord, 0::OutWord, 0::Bit)  -- Void pack
+expectedOutput :: Signal' AD20 (OutWord, OutWord, Bit) -> Signal' AD20 Bool
+expectedOutput = outputVerifier' ad20 $(v [ (0::OutWord, 0::OutWord, 0::Bit)  -- Void pack
                                       , (0, 0, 0)  -- Void pack
                                       , (0, 0, 0)  -- Void pack
                                       , (0, 0, 0)  -- Void pack
