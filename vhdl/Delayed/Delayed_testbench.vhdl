@@ -11,28 +11,28 @@ entity Delayed_testbench is
 end;
 
 architecture structural of Delayed_testbench is
-  signal finished        : boolean;
-  signal sclk1389        : std_logic;
-  signal sclk2500        : std_logic;
-  signal system1000      : std_logic;
-  signal sclk1389_rstn   : std_logic;
-  signal sclk2500_rstn   : std_logic;
-  signal system1000_rstn : std_logic;
-  signal ds_i1           : product0;
-  signal topLet_o        : product1;
+  signal finished      : boolean;
+  signal AD180         : std_logic;
+  signal DA100         : std_logic;
+  signal system72      : std_logic;
+  signal AD180_rstn    : std_logic;
+  signal DA100_rstn    : std_logic;
+  signal system72_rstn : std_logic;
+  signal ds_i1         : product0;
+  signal topLet_o      : product1;
 begin
   done <= finished;
   
   -- pragma translate_off
   process is
   begin
-    sclk1389 <= '0';
+    AD180 <= '0';
     wait for 2 ns;
     while (not finished) loop
-      sclk1389 <= not sclk1389;
-      wait for 694 ns;
-      sclk1389 <= not sclk1389;
-      wait for 695 ns;
+      AD180 <= not AD180;
+      wait for 90 ns;
+      AD180 <= not AD180;
+      wait for 90 ns;
     end loop;
     wait;
   end process;
@@ -41,13 +41,13 @@ begin
   -- pragma translate_off
   process is
   begin
-    sclk2500 <= '0';
+    DA100 <= '0';
     wait for 2 ns;
     while (not finished) loop
-      sclk2500 <= not sclk2500;
-      wait for 1250 ns;
-      sclk2500 <= not sclk2500;
-      wait for 1250 ns;
+      DA100 <= not DA100;
+      wait for 50 ns;
+      DA100 <= not DA100;
+      wait for 50 ns;
     end loop;
     wait;
   end process;
@@ -56,43 +56,43 @@ begin
   -- pragma translate_off
   process is
   begin
-    system1000 <= '0';
+    system72 <= '0';
     wait for 2 ns;
     while (not finished) loop
-      system1000 <= not system1000;
-      wait for 500 ns;
-      system1000 <= not system1000;
-      wait for 500 ns;
+      system72 <= not system72;
+      wait for 36 ns;
+      system72 <= not system72;
+      wait for 36 ns;
     end loop;
     wait;
   end process;
   -- pragma translate_on
   
   -- pragma translate_off
-  sclk1389_rstn <= '0',
+  AD180_rstn <= '0',
              '1' after 1 ns;
   -- pragma translate_on
   
   -- pragma translate_off
-  sclk2500_rstn <= '0',
+  DA100_rstn <= '0',
              '1' after 1 ns;
   -- pragma translate_on
   
   -- pragma translate_off
-  system1000_rstn <= '0',
+  system72_rstn <= '0',
              '1' after 1 ns;
   -- pragma translate_on
   
   totest : entity Delayed_topEntity_0
     port map
-      (sclk1389        => sclk1389
-      ,sclk2500        => sclk2500
-      ,system1000      => system1000
-      ,sclk1389_rstn   => sclk1389_rstn
-      ,sclk2500_rstn   => sclk2500_rstn
-      ,system1000_rstn => system1000_rstn
-      ,ds_i1           => ds_i1
-      ,topLet_o        => topLet_o);
+      (AD180         => AD180
+      ,DA100         => DA100
+      ,system72      => system72
+      ,AD180_rstn    => AD180_rstn
+      ,DA100_rstn    => DA100_rstn
+      ,system72_rstn => system72_rstn
+      ,ds_i1         => ds_i1
+      ,topLet_o      => topLet_o);
   
   ds_i1 <= ((others => 'X'),(others => 'X'),(others => 'X'));
   

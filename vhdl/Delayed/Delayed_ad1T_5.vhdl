@@ -9,7 +9,7 @@ use work.Delayed_types.all;
 entity Delayed_ad1T_5 is
   port(ds1_i1            : in product10;
        serial_data1_2_i2 : in std_logic_vector(1 downto 0);
-       topLet_o          : out product9);
+       topLet_o          : out product11);
 end;
 
 architecture structural of Delayed_ad1T_5 is
@@ -23,7 +23,7 @@ architecture structural of Delayed_ad1T_5 is
   signal i_7            : unsigned(4 downto 0);
   signal bodyVar_8      : boolean;
   signal bodyVar_9      : boolean;
-  signal ds2_10         : product5;
+  signal ds2_10         : product6;
   signal altLet_11      : std_logic_vector(11 downto 0);
   signal altLet_12      : std_logic_vector(11 downto 0);
   signal cs_13          : std_logic_vector(19 downto 0);
@@ -42,9 +42,9 @@ architecture structural of Delayed_ad1T_5 is
   signal repANF_26      : unsigned(4 downto 0);
   signal repANF_27      : std_logic_vector(11 downto 0);
   signal repANF_28      : std_logic_vector(11 downto 0);
-  signal repANF_29      : product8;
+  signal repANF_29      : product12;
   signal bodyVar_30     : product10;
-  signal bodyVar_31     : product9;
+  signal bodyVar_31     : product11;
   signal tmp_33         : integer;
   signal tmp_34         : integer;
   signal tmp_35         : std_logic_vector(10 downto 0);
@@ -53,7 +53,7 @@ architecture structural of Delayed_ad1T_5 is
   signal tmp_tte_45     : boolean;
   signal tmp_tte_rhs_46 : integer;
   signal tmp_tte_46     : boolean;
-  signal tmp_47         : product5;
+  signal tmp_47         : product6;
   signal tmp_58         : std_logic_vector(0 downto 0);
 begin
   topLet_o <= bodyVar_31;
@@ -68,7 +68,7 @@ begin
   
   wild1_2 <= tmp_34;
   
-  b1_3 <= ds2_10.product5_sel1;
+  b1_3 <= ds2_10.product6_sel1;
   
   slice_n_38 : block
     signal n_39 : std_logic_vector(11 downto 0);
@@ -79,7 +79,7 @@ begin
   
   repANF_4 <= tmp_35;
   
-  a1_5 <= ds2_10.product5_sel0;
+  a1_5 <= ds2_10.product6_sel0;
   
   slice_n_43 : block
     signal n_44 : std_logic_vector(11 downto 0);
@@ -108,9 +108,9 @@ begin
     signal n_49 : std_logic_vector(1 downto 0);
   begin
     n_49 <= serial_data1_2_i2;
-    tmp_47 <= ( n_49(tmp_47.product5_sel0'left + tmp_47.product5_sel1'length downto
-                 tmp_47.product5_sel0'right + tmp_47.product5_sel1'length)
-               , n_49(tmp_47.product5_sel1'left downto tmp_47.product5_sel1'right)
+    tmp_47 <= ( n_49(tmp_47.product6_sel0'left + tmp_47.product6_sel1'length downto
+                 tmp_47.product6_sel0'right + tmp_47.product6_sel1'length)
+               , n_49(tmp_47.product6_sel1'left downto tmp_47.product6_sel1'right)
                );
   end block;
   
@@ -176,9 +176,9 @@ begin
     repANF_28 <= altLet_21 when (true),
                  sreg1_17 when others;
   
-  repANF_29 <= (product8_sel0 => data1zm_23
-               ,product8_sel1 => data2zm_22
-               ,product8_sel2 => repANF_24);
+  repANF_29 <= (product12_sel0 => data1zm_23
+               ,product12_sel1 => data2zm_22
+               ,product12_sel2 => repANF_24);
   
   bodyVar_30 <= (product10_sel0 => repANF_28
                 ,product10_sel1 => repANF_27
@@ -187,6 +187,6 @@ begin
                 ,product10_sel4 => data2zm_22
                 ,product10_sel5 => repANF_25);
   
-  bodyVar_31 <= (product9_sel0 => bodyVar_30
-                ,product9_sel1 => repANF_29);
+  bodyVar_31 <= (product11_sel0 => bodyVar_30
+                ,product11_sel1 => repANF_29);
 end;

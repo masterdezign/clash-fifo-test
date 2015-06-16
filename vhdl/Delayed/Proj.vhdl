@@ -7,29 +7,35 @@ use work.all;
 use work.Delayed_types.all;
 
 entity Proj is
-  port(ja_data         : in std_logic_vector(1 downto 0);
-       sw              : in std_logic_vector(1 downto 0);
-       debug_flag      : in std_logic_vector(0 downto 0);
+  port(ja_data       : in std_logic_vector(1 downto 0);
+       sw            : in std_logic_vector(1 downto 0);
+       debug_flag    : in std_logic_vector(0 downto 0);
        -- clock
-       sclk1389        : in std_logic;
+       AD180         : in std_logic;
        -- asynchronous reset: active low
-       sclk1389_rstn   : in std_logic;
+       AD180_rstn    : in std_logic;
        -- clock
-       sclk2500        : in std_logic;
+       DA100         : in std_logic;
        -- asynchronous reset: active low
-       sclk2500_rstn   : in std_logic;
+       DA100_rstn    : in std_logic;
        -- clock
-       system1000      : in std_logic;
+       system72      : in std_logic;
        -- asynchronous reset: active low
-       system1000_rstn : in std_logic;
-       ja_cs           : out std_logic_vector(0 downto 0);
-       jc_cs           : out std_logic_vector(0 downto 0);
-       jc_data         : out std_logic_vector(0 downto 0));
+       system72_rstn : in std_logic;
+       ja_cs         : out std_logic_vector(0 downto 0);
+       jc_cs         : out std_logic_vector(0 downto 0);
+       jc_data       : out std_logic_vector(0 downto 0));
 end;
 
 architecture structural of Proj is
-  signal input_0         : product0;
-  signal output_0        : product1;
+  signal AD180         : std_logic;
+  signal AD180_rstn    : std_logic;
+  signal DA100         : std_logic;
+  signal DA100_rstn    : std_logic;
+  signal system72      : std_logic;
+  signal system72_rstn : std_logic;
+  signal input_0       : product0;
+  signal output_0      : product1;
 begin
   input_0 <= (product0_sel0 => ja_data
              ,product0_sel1 => sw
@@ -37,14 +43,14 @@ begin
   
   Delayed_topEntity_0_inst : entity Delayed_topEntity_0
     port map
-      (ds_i1           => input_0
-      ,sclk1389        => sclk1389
-      ,sclk1389_rstn   => sclk1389_rstn
-      ,sclk2500        => sclk2500
-      ,sclk2500_rstn   => sclk2500_rstn
-      ,system1000      => system1000
-      ,system1000_rstn => system1000_rstn
-      ,topLet_o        => output_0);
+      (ds_i1         => input_0
+      ,AD180         => AD180
+      ,AD180_rstn    => AD180_rstn
+      ,DA100         => DA100
+      ,DA100_rstn    => DA100_rstn
+      ,system72      => system72
+      ,system72_rstn => system72_rstn
+      ,topLet_o      => output_0);
   
   ja_cs <= output_0.product1_sel0;
   

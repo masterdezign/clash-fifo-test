@@ -7,9 +7,9 @@ use work.all;
 use work.Delayed_types.all;
 
 entity Delayed_da4T_2 is
-  port(ds_i1    : in product2;
-       ds1_i2   : in product3;
-       topLet_o : out product4);
+  port(ds_i1    : in product3;
+       ds1_i2   : in product4;
+       topLet_o : out product5);
 end;
 
 architecture structural of Delayed_da4T_2 is
@@ -17,14 +17,14 @@ architecture structural of Delayed_da4T_2 is
   signal cs_1           : std_logic_vector(35 downto 0);
   signal cmd1_2         : std_logic_vector(31 downto 0);
   signal i_3            : unsigned(5 downto 0);
-  signal altLet_4       : product4;
+  signal altLet_4       : product5;
   signal debug_flag_5   : std_logic_vector(0 downto 0);
   signal data1_6        : std_logic_vector(11 downto 0);
-  signal altLet_7       : product4;
-  signal repANF_8       : product5;
+  signal altLet_7       : product5;
+  signal repANF_8       : product6;
   signal repANF_9       : std_logic_vector(0 downto 0);
   signal repANF_10      : std_logic_vector(0 downto 0);
-  signal repANF_11      : product2;
+  signal repANF_11      : product3;
   signal repANF_12      : std_logic_vector(11 downto 0);
   signal altLet_13      : std_logic_vector(11 downto 0);
   signal altLet_14      : std_logic_vector(11 downto 0);
@@ -47,25 +47,25 @@ architecture structural of Delayed_da4T_2 is
 begin
   topLet_o <= altLet_4;
   
-  burst_signal_0 <= ds_i1.product2_sel3;
+  burst_signal_0 <= ds_i1.product3_sel3;
   
-  cs_1 <= ds_i1.product2_sel2;
+  cs_1 <= ds_i1.product3_sel2;
   
-  cmd1_2 <= ds_i1.product2_sel1;
+  cmd1_2 <= ds_i1.product3_sel1;
   
-  i_3 <= ds_i1.product2_sel0;
+  i_3 <= ds_i1.product3_sel0;
   
   altLet_4 <= altLet_7;
   
-  debug_flag_5 <= ds1_i2.product3_sel1;
+  debug_flag_5 <= ds1_i2.product4_sel1;
   
-  data1_6 <= ds1_i2.product3_sel0;
+  data1_6 <= ds1_i2.product4_sel0;
   
-  altLet_7 <= (product4_sel0 => repANF_11
-              ,product4_sel1 => repANF_8);
+  altLet_7 <= (product5_sel0 => repANF_11
+              ,product5_sel1 => repANF_8);
   
-  repANF_8 <= (product5_sel0 => repANF_10
-              ,product5_sel1 => repANF_9);
+  repANF_8 <= (product6_sel0 => repANF_10
+              ,product6_sel1 => repANF_9);
   
   msb_n_30 : block
     signal n_31 : std_logic_vector(35 downto 0);
@@ -99,10 +99,10 @@ begin
   
   repANF_10 <= tmp_34;
   
-  repANF_11 <= (product2_sel0 => repANF_26
-               ,product2_sel1 => repANF_19
-               ,product2_sel2 => repANF_18
-               ,product2_sel3 => repANF_12);
+  repANF_11 <= (product3_sel0 => repANF_26
+               ,product3_sel1 => repANF_19
+               ,product3_sel2 => repANF_18
+               ,product3_sel3 => repANF_12);
   
   with (subjLet_17) select
     repANF_12 <= altLet_13 when (true),

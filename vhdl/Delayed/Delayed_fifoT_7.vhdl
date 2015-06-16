@@ -6,25 +6,25 @@ use IEEE.MATH_REAL.ALL;
 use work.all;
 use work.Delayed_types.all;
 
-entity Delayed_fifoT_8 is
+entity Delayed_fifoT_7 is
   port(eta_i1   : in array_of_std_logic_vector_12(0 to 305);
-       eta_i2   : in product3;
-       topLet_o : out product6);
+       eta_i2   : in product4;
+       topLet_o : out product7);
 end;
 
-architecture structural of Delayed_fifoT_8 is
+architecture structural of Delayed_fifoT_7 is
   signal subjLet_0 : boolean;
   signal altLet_1  : array_of_std_logic_vector_12(0 to 305);
   signal repANF_2  : array_of_std_logic_vector_12(0 to 305);
   signal repANF_3  : std_logic_vector(11 downto 0);
-  signal altLet_4  : product6;
+  signal altLet_4  : product7;
   signal x_5       : std_logic_vector(11 downto 0);
   signal d_pulse_6 : std_logic_vector(0 downto 0);
   signal tmp_9     : std_logic_vector(11 downto 0);
 begin
   subjLet_0 <= d_pulse_6 = ("1");
   
-  Delayed_zuzuzl_9_altLet_1 : entity Delayed_zuzuzl_9
+  Delayed_zuzuzl_8_altLet_1 : entity Delayed_zuzuzl_8
     port map
       (bodyVar_o => altLet_1
       ,eta_i1    => eta_i1
@@ -57,12 +57,12 @@ begin
   
   repANF_3 <= tmp_9;
   
-  altLet_4 <= (product6_sel0 => repANF_2
-              ,product6_sel1 => repANF_3);
+  altLet_4 <= (product7_sel0 => repANF_2
+              ,product7_sel1 => repANF_3);
   
-  x_5 <= eta_i2.product3_sel0;
+  x_5 <= eta_i2.product4_sel0;
   
-  d_pulse_6 <= eta_i2.product3_sel1;
+  d_pulse_6 <= eta_i2.product4_sel1;
   
   topLet_o <= altLet_4;
 end;

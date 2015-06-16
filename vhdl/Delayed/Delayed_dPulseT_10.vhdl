@@ -6,12 +6,12 @@ use IEEE.MATH_REAL.ALL;
 use work.all;
 use work.Delayed_types.all;
 
-entity Delayed_dPulseT_11 is
+entity Delayed_dPulseT_10 is
   port(pTS_i1   : in unsigned(6 downto 0);
-       topLet_o : out product7);
+       topLet_o : out product2);
 end;
 
-architecture structural of Delayed_dPulseT_11 is
+architecture structural of Delayed_dPulseT_10 is
   signal subjLet_0 : boolean;
   signal altLet_1  : unsigned(6 downto 0);
   signal repANF_2  : unsigned(6 downto 0);
@@ -32,6 +32,6 @@ begin
     repANF_4 <= std_logic_vector'("1") when (true),
                 std_logic_vector'("0") when others;
   
-  topLet_o <= (product7_sel0 => repANF_2
-              ,product7_sel1 => repANF_4);
+  topLet_o <= (product2_sel0 => repANF_2
+              ,product2_sel1 => repANF_4);
 end;
