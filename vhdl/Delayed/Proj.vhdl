@@ -28,12 +28,6 @@ entity Proj is
 end;
 
 architecture structural of Proj is
-  signal AD180         : std_logic;
-  signal AD180_rstn    : std_logic;
-  signal DA100         : std_logic;
-  signal DA100_rstn    : std_logic;
-  signal system72      : std_logic;
-  signal system72_rstn : std_logic;
   signal input_0       : product0;
   signal output_0      : product1;
 begin
